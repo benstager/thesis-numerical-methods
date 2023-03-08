@@ -8,7 +8,13 @@ ys = zeros(length(y0),N+1);
 ys(:,1) = y0;
 y = y0;
 dt = diff(tspan)/N;
-I = speye(length(y0));
+
+if(issparse(L))
+    I = speye(length(y0));
+else
+    I = eye(length(y0));
+end
+
 % Burgers" 
 p0 = expm(dt*L);
 p1 = L\(I-expm(dt*L));

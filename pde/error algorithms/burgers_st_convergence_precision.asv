@@ -25,7 +25,7 @@ methods_IMEX = {
     { @IMEXeuler,   @(n) stepsizeSelector(tspan, n, 50, 100, 2, 1) }   % obtained using Nx = 50 and [Userx,Usery] = ginput(1)
     { @expIntegrator,      @(n) stepsizeSelector(tspan, n, 50, 100, 2, 1) }     % obtained using Nx = 50 and [Userx,Usery] = ginput(1)
     { @IMEXmidpoint,    @(n) stepsizeSelector(tspan, n, 50, 100, 2, 2)}
-    { @IMEXdirk,    @(n) stepsizeSelector(tspan, n, 50, 100, 2, 2)}
+    { @IMEXdirk,    @(n) stepsizeSelector(tspan, n, 50, 100, 2,2)}
     };
 
 Nc = length(methods_classical);
