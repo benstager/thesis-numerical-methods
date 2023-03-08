@@ -7,7 +7,7 @@ close all;
 
 % burgers
 
-        Nx = 40; % spatial grid points
+        Nx = 100; % spatial grid points
         Nt = 10.^(1:4); % timesteps to test
         Nt_ref = 10^5;
         eqn_name = sprintf('Burgers Equation (Nx = %i)', Nx);

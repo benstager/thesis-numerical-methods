@@ -4,6 +4,6 @@ function [U] = burgersNumericalSolution(epsilon,Nt,Nx,tspan)
 
 y0 = burgersParameters(Nx);
 [f,L,N] = burgersOperators(Nx, epsilon);
-U = expRK(L,N,tspan,y0,Nt);
+U = IMEXdirk(L,N,tspan,y0,Nt);
 
 end
