@@ -7,7 +7,7 @@ close all;
 
 % burgers
 
-        Nx = 100; % spatial grid points
+        Nx = 127; % spatial grid points
         Nt = 10.^(1:4); % timesteps to test
         Nt_ref = 10^5;
         eqn_name = sprintf('Burgers Equation (Nx = %i)', Nx);
@@ -89,12 +89,12 @@ ylabel('error');
 title(['Convergence Diagram - ', eqn_name]);
 legend(legend_entries); legend box off;
 
-% precision diagram
-figure(2)
-loglog(time,error,LineWidth=2.0);
-% yline(spatialError, 'k--', LineWidth = 2.0);
-ylim([1e-16,1e2])
-xlabel('time (sec)'); 
-ylabel('error'); 
-title(['Precision Diagram - ', eqn_name]);
-legend(legend_entries); legend box off;
+% % precision diagram
+% figure(2)
+% loglog(time,error,LineWidth=2.0);
+% % yline(spatialError, 'k--', LineWidth = 2.0);
+% ylim([1e-16,1e2])
+% xlabel('time (sec)'); 
+% ylabel('error'); 
+% title(['Precision Diagram - ', eqn_name]);
+% legend(legend_entries); legend box off;

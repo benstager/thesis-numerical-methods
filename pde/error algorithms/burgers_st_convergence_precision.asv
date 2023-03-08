@@ -24,8 +24,9 @@ methods_classical = {
 methods_IMEX = {
     { @IMEXeuler,   @(n) stepsizeSelector(tspan, n, 50, 100, 2, 1) }   % obtained using Nx = 50 and [Userx,Usery] = ginput(1)
     { @expIntegrator,      @(n) stepsizeSelector(tspan, n, 50, 100, 2, 1) }     % obtained using Nx = 50 and [Userx,Usery] = ginput(1)
-    { @IMEXmidpoint,    @(n) stepsizeSelector(tspan, n, 50, 100, 2, 2)}
-    { @IMEXdirk,    @(n) stepsizeSelector(tspan, n, 50, 100, 2,2)}
+    { @IMEXmidpoint,    @(n) stepsizeSelector(tspan, n, 30, 60, 2, 2)}
+    { @IMEXdirk,    @(n) stepsizeSelector(tspan, n, 30, 60, 2, 2)}
+    { @expRK,   @(n) stepsizeSelector(tspan, n, 30, 60, 2, 2)}
     };
 
 Nc = length(methods_classical);
@@ -72,7 +73,7 @@ end
 %% Generate Plots
 
 % legend names for methods
-methods = {@euler,@heun,@IMEXeuler,@expIntegrator,@IMEXmidpoint};
+methods = {@euler,@heun,@IMEXeuler,@expIntegrator,@IMEXmidpoint,@IMEXdirk,@expRK};
 getMethodName = @(f) functions(f).function;
 legend_entries = cellfun(getMethodName, methods, 'UniformOutput', false);
 
