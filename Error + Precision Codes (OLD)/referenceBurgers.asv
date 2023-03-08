@@ -1,0 +1,15 @@
+function [U] = referenceBurgers(Nt,Nx)
+
+xspan = [-1,1];
+tspan = [0,.01];
+ts = linspace(tspan(1),tspan(2),Nt+1);
+xs = linspace(xspan(1),xspan(2),Nx+2);
+f = @(x) sin(-pi*x);
+y0 = f(xs(2:Nx+1))';
+epsilon = .7;
+L = epsilon*Uxx(Nx,diff(xspan)/(Nx+1));
+Nl = @(P) -Ux(Nx,diff(xspan)/(Nx+1))* (P.^2/2);
+[U, time] = IMEXeuler(L,Nl,tspan,y0,Nt);
+
+end
+% why is surf printing in command window

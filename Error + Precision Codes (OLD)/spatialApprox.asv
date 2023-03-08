@@ -1,0 +1,8 @@
+function [grid] = spatialApprox(approx,reference)
+
+nr = log(length(reference)+1)/log(2);
+na = log(length(approx)+1)/log(2);
+
+grid = reference(2)
+end
+

@@ -1,0 +1,9 @@
+function [f,L,Nl] = burgersOperators(epsilon,Nx)
+
+xspan = [-1,1];
+dx = diff(xspan)/(Nx+1);
+f = @(t,U) epsilon*Uxx(Nx,dx)*U - Ux(Nx,dx)*(U.^2/2);
+L =  epsilon*Uxx(Nx,dx);
+Nl = @(U) Ux(Nx,dx)*(U.^2/2);
+
+end
