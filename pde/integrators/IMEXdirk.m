@@ -22,7 +22,7 @@ for i = 1:N
     k2 = (I-dt*gamma*L)\(L*(y+dt*((1-gamma)*k1)+dt*((delta)*Nl(y)+delta*k2_hat)));
     u2 = y+dt*((1-gamma)*k1+gamma*k2)+dt*(delta*k1_hat+(1-delta)*k2_hat);
     k3_hat = Nl(u2);
-    y = y+dt*((1-gamma)*k1+gamma*k2) + dt*((1-gamma)*k1_hat+gamma*k2_hat);
+    y = y+dt*((1-gamma)*k1+gamma*k2) + dt*((1-gamma)*k2_hat+gamma*k3_hat);
     ys(:,i+1) = y;
 end
 

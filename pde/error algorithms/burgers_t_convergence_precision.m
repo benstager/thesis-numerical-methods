@@ -7,7 +7,7 @@ close all;
 
 % burgers
 
-        Nx = 100; % spatial grid points
+        Nx = 40; % spatial grid points
         Nt = 10.^(1:4); % timesteps to test
         Nt_ref = 10^5;
         eqn_name = sprintf('Burgers Equation (Nx = %i)', Nx);
@@ -35,8 +35,8 @@ close all;
         
 
         exact_IMEX  = burgersNumericalSolution(epsilon, Nt_ref, Nx, tspan);
-        approximate_IMEX = burgersNumericalSolution(epsilon, Nt_ref, 63, tspan);
-        spatialError = spatialError(approximate_IMEX(:,end), exact_IMEX(:,end));
+%         approximate_IMEX = burgersNumericalSolution(epsilon, Nt_ref, 63, tspan);
+%         spatialError = spatialError(approximate_IMEX(:,end), exact_IMEX(:,end));
         errorNorm = @(approx) norm(approx - exact_IMEX(:,end), 'inf');
 
 %% run numerical experiments
