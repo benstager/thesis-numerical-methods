@@ -1,0 +1,14 @@
+function [P] = pressure(n,x)
+
+% suppose n is amount of xks
+
+p = 0;
+xks = stokes_parameters(n);
+fks = forces(xks);
+% m = length(xs(1,:));
+
+for k = 1:n
+    p = 
+
+end
+
