@@ -1,6 +1,9 @@
-function [xn] = stokes_parameters(n)
+function [xks,fks] = stokes_parameters()
 % Takes in n amount of R2 points to test in domain, not functional evaluations, returns random coordinates
-xn = rand(2,n);
+
+xks = [[0;0],[.2;.4]];
+fks = [[1;1],[-2;-2]];
+
 
 
 end
