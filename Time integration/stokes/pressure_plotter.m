@@ -1,13 +1,12 @@
 
-% Plotting pressure as a surface u = p(x,y)
-x = [-1,1];
-y = [-1,1];
-nx = 201;
-ny = 201;
-xs = linspace(x(1), x(2), nx);
-ys = linspace(y(1), y(2), ny);
+% Pressure plotter plots p = f(x,y), where p is evaluated at x,y in mesh
 
-[xks,fks] = stokes_parameters();
+
+% Plotting pressure as a surface u = p(x,y)
+nx = 200;
+ny = 200;
+
+[xks,fks,xs,ys] = stokes_parameters(nx,ny);
 p = zeros(ny,nx);
 
 % F = @ (t,X) velocity_field(X,xks,fks) X' = F(X)
