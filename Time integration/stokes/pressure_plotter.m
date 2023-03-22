@@ -14,7 +14,7 @@ p = zeros(ny,nx);
 
 for i = 1:nx
     for j = 1:ny
-        p(j,i) = pressure([xs(i),ys(j)],xks,fks);
+        p(j,i) = pressure_regularized([xs(i),ys(j)],xks,fks);
     end
 end
 

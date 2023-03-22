@@ -13,7 +13,7 @@ vy = zeros(ny,nx);
 % Vx surface
 for i = 1:nx
     for j = 1:ny
-        v = velocity([xs(i),ys(j)],xks,fks);
+        v = velocity_regularized([xs(i),ys(j)],xks,fks);
         vx(j,i) = v(1,1);
     end
 end
@@ -21,7 +21,7 @@ end
 % Vy surface
 for i = 1:nx
     for j = 1:ny
-        v = velocity([xs(i),ys(j)],xks,fks);
+        v = velocity_regularized([xs(i),ys(j)],xks,fks);
         vy(j,i) = v(2,1);
     end
 end
