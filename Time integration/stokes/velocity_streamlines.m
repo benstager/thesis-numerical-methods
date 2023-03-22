@@ -3,22 +3,20 @@
 % Function should produce streamline curves in the parametrized x-y plane
 
 % Setting initial values
-ny = 5;
-nx = 5;
+ny = 20;
+nx = 20;
 [xks,fks,xs,ys] = stokes_parameters(nx,ny);
 
 
 % Producing a velocity vector at certain X = (x;y) position
-
-y0 = [.1,.1];
-% F = @(t,X) velocity(X,xks,fks);
+tspan = [0,1];
+f = @(t,X) velocity_regularized(X,xks,fks)';
+Nt = 1000;
 
 for i = 1:nx
     for j = 1:ny
-        v = velocity([xs(i),ys(j)],xks,fks);
-        [ysx,cpux] = eulerLin(v(1),[xs(1),xs(end)],y0(1),nx);
-        [ysy,cpuy] = eulerLin(v(2),[ys(1),ys(end)],y0(2),ny);
-        plot(ysx,ysy,color = 'black',LineWidth = 1.5);
+        [X,cpu] = euler(f,tspan,[xs(i),ys(j)],Nt);
+        plot(X(1,:),X(2,:),color = 'blue');
         hold on;
     end
 end
