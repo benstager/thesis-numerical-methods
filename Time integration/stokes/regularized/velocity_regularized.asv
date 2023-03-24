@@ -1,5 +1,5 @@
 function v = velocity_regularized(x,xks,fks)
-% Returns velocity vector in R2
+% Returns 
 
 v = zeros(2,1);
 mu = 1;

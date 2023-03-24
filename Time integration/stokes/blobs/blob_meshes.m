@@ -1,5 +1,7 @@
 function z = blob_meshes(x0,epsilon,xs,ys)
 
+% Blob mesh returns a mesh z for a given x0 in R2, epsilon, and xs/ys
+
 ny = length(ys);
 nx = length(xs);
 z = zeros(ny,nx);

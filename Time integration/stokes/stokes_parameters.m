@@ -12,8 +12,8 @@ fks = [[1;1],[-2;-2],[.5;.3]];
 % fks = [1;1];
 
 % Domain and meshes
-x = [0,1];
-y = [0,1];
+x = [-1,1];
+y = [-1,1];
 xs = linspace(x(1), x(2), nx);
 ys = linspace(y(1), y(2), ny);
 

@@ -18,6 +18,8 @@ for i = 1:nx
     end
 end
 
+
 surf(xs, ys, p);
 shading interp 
 colormap jet
+title('Pressure for regularized Stokeslets'); xlabel('x'); ylabel('y'); zlabel('p')

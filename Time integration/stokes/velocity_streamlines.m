@@ -3,14 +3,14 @@
 % Function should produce streamline curves in the parametrized x-y plane
 
 % Setting initial values
-ny = 20;
-nx = 20;
+ny = 10;
+nx = 10;
 [xks,fks,xs,ys] = stokes_parameters(nx,ny);
 
 
 % Producing a velocity vector at certain X = (x;y) position
-tspan = [0,1];
-f = @(t,X) velocity_regularized(X,xks,fks)';
+tspan = [0,5];
+f = @(t,X)  velocity(X,xks,fks)';
 Nt = 1000;
 
 for i = 1:nx

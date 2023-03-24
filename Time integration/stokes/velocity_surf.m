@@ -28,12 +28,12 @@ end
 
 figure(1)
 surf(xs,ys,vx);
-title('Vx');
+title('vx for regularized Stokeslets'); xlabel('x'); ylabel('y'); zlabel('vx')
 shading interp
 colormap jet
 
 figure(2)
 surf(xs,ys,vy);
-title('Vy');
+title('vy for regularized Stokeslets'); xlabel('x'); ylabel('y'); zlabel('vy')
 shading interp
 colormap jet

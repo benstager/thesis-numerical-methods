@@ -4,7 +4,7 @@ function [p] = pressure_regularized(x,xks,fks)
 
 p = 0;
 n = size(xks,2);
-epsilon = 0;
+epsilon = .3;
 
 
 for i = 1:n
