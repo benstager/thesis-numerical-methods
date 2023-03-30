@@ -1,58 +1,47 @@
-function Xvp = f_new(t,Xv)
+function Xvp = f_old2(t,Xv)
 % Returns velocity for each blob center
 
-fks = @(t) [-.5;0];
-
+fks_right = @(t) [0;10*sin(2*t)];
+fks_left = @(t) [0;0];
 n = length(Xv)/2;
 Xvp = zeros(2*n,1);
-k = 3;
 
-% Finding appropriate way to determine equilibrium position of spring
-delta = .07*n;
+% spring forces
 
-% left most blob
-for i = 1
-    Xvp(2*i-1:2*i) = velocity_regularized...
-    ([Xv(2*i-1),Xv(2*i)],[Xv(end-1);Xv(end)],fks(t));
+% all points
+for j = 2:n-1
+    for i = 1:n
+        Xvp(2*i-1:2*i) = Xvp(2*i-1:2*i) + velocity_regularized(Bp(Xv,i)',Bp(Xv,n),fks_right(t)+fSpring(Xv,n,n-1))+...
+            velocity_regularized(Bp(Xv,i)',Bp(Xv,1),fks_left(t)+ fSpring(Xv,1,2))...
+            + ...
+        velocity_regularized(Bp(Xv,i)',Bp(Xv,j), ...
+            fSpring(Xv,j,j-1)+fSpring(Xv,j,j+1));
+    end
 end
 
-% middle blobs
-for i = 2:n-1
-    % contributing forces to left of current cutoff
-    f_spring_left = -k*(norm([Xv(2*i-3);Xv(2*i-2)] - [Xv(2*i-1);Xv(2*i)],2)-delta);
+% middle points
+% for i = 2:n-1
+%     % contribution of forces from ith blob
+%     for j = 1:n
+%         % at j locations
+%         Xvp(2*j-1:2*j) = Xvp(2*j-1:2*j) + velocity_regularized(Bp(Xv,j)',Bp(Xv,i), ...
+%             fSpring(Xv,i,i-1)+fSpring(Xv,i,i+1));...
+%     end
+% end
 
-    unit_left = [Xv(2*i-3);Xv(2*i-2)] - [Xv(2*i-1);Xv(2*i)] ...
-                / norm([Xv(2*i-3);Xv(2*i-2)] - [Xv(2*i-1);Xv(2*i)],2);
 
-    F_spring_left = f_spring_left * unit_left;
-
-    % contributing forces to right of current cutoff
-    f_spring_right = -k*(norm([Xv(2*i+1);Xv(2*i+2)] - [Xv(2*i-1);Xv(2*i)],2)-delta);
-
-    unit_right = [Xv(2*i+1);Xv(2*i+2)] - [Xv(2*i-1);Xv(2*i)] ...
-                / norm([Xv(2*i+1);Xv(2*i+2)] - [Xv(2*i-1);Xv(2*i)],2);
-
-    F_spring_right = f_spring_right * unit_right;
-    
-    % total force uses law of superposition
-    total_force = F_spring_left + F_spring_right;
-    
-    % applying force to velocity function
-    Xvp(2*i-1:2*i) = velocity_regularized...
-    ([Xv(2*i-1),Xv(2*i)],[Xv(1);Xv(2)],total_force);
 
 end
 
-% right most blob
-for i = n
-    f_spring_left = -k*(norm([Xv(2*i-3);Xv(2*i-2)] - [Xv(2*i-1);Xv(2*i)],2)-delta);
-    unit_left = [Xv(2*i-3);Xv(2*i-2)] - [Xv(2*i-1);Xv(2*i)] ...
-                / norm([Xv(2*i-3);Xv(2*i-2)] - [Xv(2*i-1);Xv(2*i)],2);
-    F_spring_left = f_spring_left * unit_left;
-
-    Xvp(2*i-1:2*i) = velocity_regularized...
-    ([Xv(2*i-1),Xv(2*i)],[Xv(1);Xv(2)],F_spring_left);
+function [X] = Bp(Xv,i) % returns ith blob position
+    X = [Xv(2*i-1);Xv(2*i)];
 end
 
-
+function [F] = fSpring(Xv,i,j) % returns spring force on blob i, from j
+    k = 1000; % spring constant 
+    len_rest = .1; 
+    len_curr = norm(Bp(Xv,j)- Bp(Xv,i),2); 
+    f_mag = k*(len_curr-len_rest);
+    unit_vector = (Bp(Xv,j) - Bp(Xv,i))/len_curr;
+    F = f_mag * unit_vector;
 end

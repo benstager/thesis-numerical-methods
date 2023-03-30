@@ -1,5 +1,6 @@
 
 % Plots movement of blob centers for certain force
+close all; clear all;
 
 nx = 40;
 ny = 40;
@@ -16,9 +17,9 @@ X = init_blob(n);
 % end
 
 Xv = reshape(X,[2*n,1]);
-tspan = [0,1];
+tspan = [0,5];
 Nt = 1000;
-[Xvs,cpu] = heun(@f,tspan,Xv,Nt);
+[Xvs,cpu] = euler(@f,tspan,Xv,Nt);
 
 figure()
 for i = 1:Nt
