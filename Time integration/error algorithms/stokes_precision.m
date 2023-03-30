@@ -3,37 +3,33 @@
 % taken to solve highly viscous stokes flow
 clear all;
 
+% grid parameters
 nx = 40;
 ny = 40;
-n = 6;
-epsilon = .5;
-
+n = 30;
+epsilon = .5/10;
 [xks,fks,xs,ys] = stokes_parameters(nx,ny);
 X = init_blob(n);
 
-for i = 1:n
-    z = blob_meshes(X(:,i),epsilon,xs,ys);
-    % surf(xs,ys,z); shading interp; colormap jet;
-    % hold on;
-end
-
-% reference fine solution
+% reference fine solution, typical of power length(Nts) + 1
 Xv = reshape(X,[2*n,1]);
 tspan = [0,1];
-Nt_ref = 2^5;
-[Xvs,cpu] = euler(@f,tspan,Xv,Nt_ref);
+Nt_ref = 3^6;
+[Xvs,cpu] = heun(@f,tspan,Xv,Nt_ref);
 Xvi = Xvs(:,end);
 Xvi = reshape(Xvi,[2,length(Xvi)/2]);
 x_ref = Xvi(1,:);
 y_ref = Xvi(2,:);
 
-% computing error for methods
+
 methods = {@euler, @heun};
-Nts = 2.^(1:4);
+Nts = 3.^(2:5);
 dts = diff(tspan)./Nts;
 
 error = zeros(length(Nts),length(methods));
 time = zeros(length(Nts),length(methods));
+
+% computing error at final time step for each cutoff position
 for i = 1:length(methods)
     for j = 1:length(Nts)
         [Xvs,cpu] = methods{i}(@f,tspan,Xv,Nts(j));
@@ -49,14 +45,15 @@ end
 getMethodName = @(f) functions(f).function;
 legend_entries = cellfun(getMethodName, methods, 'UniformOutput', false);
 
+
 % convergence diagram
 figure(1)
 loglog(dts,error,LineWidth=2.0); hold on;
-xlabel('step size (Nt)');
+xlabel('step size (dt)');
 ylabel('error');
 title('Convergence Diagram for Stokes Flow');
 legend(legend_entries); legend box on;
-
+ylim([10^-5, 10^2]);
 
 % precision diagram
 figure(2)
@@ -65,5 +62,5 @@ xlabel('time (sec)');
 ylabel('error');
 title('Precision Diagram for Stokes Flow');
 legend(legend_entries); legend box off;
-
+ylim([10^-5, 10^2]);
         
