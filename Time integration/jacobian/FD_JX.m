@@ -14,6 +14,15 @@ for i = 1:length(X)
     end
 end
 
+% redoing using generalized function notation
+
+F = @(X) [2*X(1)^2-3*X(2)^2; 3*X(1)^2-4*X(2)^2];
+
+for i = 1:length(X)
+    e = zeros(length(X),1);
+    e(i) = 1;
+    J (:,i) = (F(X+h*e) - F(X))/h;
+end
 
 end
 
