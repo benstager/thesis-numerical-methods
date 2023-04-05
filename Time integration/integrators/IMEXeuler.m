@@ -1,8 +1,6 @@
 function [ys,cpu_time] = IMEXeuler(L,Nl,tspan,y0,N)
 
-% Imex scheme for Burgers
-% f = Ly + N(y);
-% How to scheme generally?
+% Imex scheme for y' = Ly + N(y)
 
 ys = zeros(length(y0),N+1);
 ys(:,1) = y0;
@@ -14,7 +12,7 @@ if(issparse(L))
 else
     I = eye(length(y0));
 end
-% Burgers" 
+
 tic
 for i = 1:N
     y = (I-dt*L)\(y + dt*Nl(y));

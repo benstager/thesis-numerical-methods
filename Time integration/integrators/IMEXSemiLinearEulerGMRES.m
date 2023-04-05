@@ -10,11 +10,12 @@ dt = diff(tspan)/N;
 t = tspan(1);
 I = speye(length(y0));
 tol = 10^-2;
+h = 10^-5;
 
 tic
 for i = 1:N
-    J_yn = sparse(jac_FD(F,y,dt));
-    Jv = jac_ProdFD(F,y,y,dt)';
+    J_yn = sparse(jac_FD(F,y,h));
+    Jv = jac_ProdFD(F,y,y,h)';
     [y,flag] = gmres(I-dt*J_yn,y + dt*(F(t,y)-Jv),...
         size(I,1),tol);
     ys(:,i+1) = y;

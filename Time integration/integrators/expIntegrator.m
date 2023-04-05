@@ -1,5 +1,6 @@
 function [ys,cpu_time] = expIntegrator(L,Nl,tspan,y0,N)
 
+% exponential integrator for y' = Ly + N(y)
 
 ys = zeros(length(y0),N+1);
 ys(:,1) = y0;

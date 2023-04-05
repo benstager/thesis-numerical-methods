@@ -1,6 +1,6 @@
 function [ys,cpu_time] = IMEXmidpoint(L,Nl,tspan,y0,N)
 
-
+% IMEX RK method for y' = Ly + N(y)
 
 ys = zeros(length(y0),N+1);
 ys(:,1) = y0;
