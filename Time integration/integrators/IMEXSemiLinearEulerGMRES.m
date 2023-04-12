@@ -8,17 +8,15 @@ ys(:,1) = y0;
 y = y0;
 dt = diff(tspan)/N;
 t = tspan(1);
-I = eye(length(y0));
-tol = 10^-2;
-h = 10^-8;
+dim = length(y0);
+tol = 10^-4;
+h = 10^-7;
 
 tic
 for i = 1:N
-    J_yn = jac_FD(F,y,h);
     Jv = jac_ProdFD(F,y,y,h)';
-    A = I - J_yn;
-    [y,flag] = gmres(@(y) (I - J_yn)*y, y + dt*(F(t,y) - Jv),...
-        length(A),tol);
+    [y,flag] = gmres(@(X) X-dt*jac_ProdFD(F,y,X,h)', y + dt*(F(t,y) - Jv),...
+        dim,tol,dim);
     ys(:,i+1) = y;
     t = t + dt;
 end
