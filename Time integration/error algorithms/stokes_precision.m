@@ -6,7 +6,7 @@ clear all;
 % grid parameters
 nx = 40;
 ny = 40;
-n = 30;
+n = 5;
 epsilon = .5/10;
 [xks,fks,xs,ys] = stokes_parameters(nx,ny);
 X = init_blob(n);
@@ -14,7 +14,7 @@ X = init_blob(n);
 % reference fine solution, typical of power length(Nts) + 1
 Xv = reshape(X,[2*n,1]);
 tspan = [0,1];
-Nt_ref = 3^6;
+Nt_ref = 10^5;
 [Xvs,cpu] = heun(@f,tspan,Xv,Nt_ref);
 Xvi = Xvs(:,end);
 Xvi = reshape(Xvi,[2,length(Xvi)/2]);
@@ -22,8 +22,8 @@ x_ref = Xvi(1,:);
 y_ref = Xvi(2,:);
 
 
-methods = {@euler, @heun};
-Nts = 3.^(2:5);
+methods = {@euler, @heun, @IMEXSemiLinearEulerGMRES};
+Nts = 10.^(1:4);
 dts = diff(tspan)./Nts;
 
 error = zeros(length(Nts),length(methods));
