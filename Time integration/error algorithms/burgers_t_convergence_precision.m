@@ -1,5 +1,5 @@
 % =========================================================================
-% Heat equation convergence and precision diagrams for time refinement.
+% Burgers equation convergence and precision diagrams for time refinement.
 % =========================================================================
 
 clear;
@@ -7,7 +7,7 @@ close all;
 
 % burgers
 
-        Nx = 100; % spatial grid points
+        Nx = 200; % spatial grid points
         Nt = 10.^(1:4); % timesteps to test
         Nt_ref = 10^5;
         eqn_name = sprintf('Burgers Equation (Nx = %i)', Nx);
@@ -51,7 +51,6 @@ for i = 1:Nc
         time(j,i) = cpu_time;
     end
 end
-
 
 for i = 1:Ni
     for j = 1:length(Nt)

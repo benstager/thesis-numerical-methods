@@ -8,11 +8,12 @@ y = y0;
 dt = diff(tspan)/N;
 t = tspan(1);
 I = eye(length(y0));
-h = 10^-5;
+h = 10^-7;
 
 tic
 for i = 1:N
-    y = (I-dt*jac_FD(F,y,h))\(y + dt*(F(t,y)-jac_ProdFD(F,y,y,h)'));
+    J_yn = jac_FD(F,y,h);
+    y = (I-dt*J_yn)\(y + dt*(F(t,y)-J_yn*y));
     ys(:,i+1) = y;
     t = t + dt;
 end

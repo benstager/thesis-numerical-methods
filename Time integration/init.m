@@ -1,8 +1,15 @@
 
-
 addpath("integrators/")
 addpath("helpers/")
 addpath("error algorithms/")
 addpath("heat-multi-freq")
 addpath("burgers")
-addpath("stokes/")
+addpath("stokes")
+addpath("stokes/irregularized/")
+addpath("stokes/regularized/")
+addpath("stokes/blobs/")
+addpath("stokes/plotters/")
+addpath("semilinear helpers/")
+addpath("semilinear helpers/jacobian")
+addpath("semilinear helpers/GMRES/")
+addpath("3d stokes/")

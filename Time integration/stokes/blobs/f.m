@@ -7,7 +7,6 @@ n = length(Xv)/2;
 Xvp = zeros(2*n,1);
 
 % spring forces
-
 % first point, external forcing and last point
 for i = 1:n
     Xvp(2*i-1:2*i) = Xvp(2*i-1:2*i) + ...
@@ -27,19 +26,6 @@ for i = 2:n-1
     end
 end
 
-end
-
-function [X] = Bp(Xv,i) % returns ith blob position
-    X = [Xv(2*i-1);Xv(2*i)];
-end
-
-function [F] = fSpring(Xv,i,j) % returns spring force on blob i, from j
-    k = 1000; % spring constant 
-    len_rest = .1; 
-    len_curr = norm(Bp(Xv,j)- Bp(Xv,i),2); 
-    f_mag = k*(len_curr-len_rest);
-    unit_vector = (Bp(Xv,j) - Bp(Xv,i))/len_curr;
-    F = f_mag * unit_vector;
 end
 
     

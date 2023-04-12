@@ -4,7 +4,7 @@ function v = velocity_regularized(x,xks,fks)
 v = zeros(2,1);
 mu = 1;
 n = size(xks,2);
-epsilon = .5;
+epsilon = .5/10;
 
 for i = 1:n
     v_k = -(fks(:,i))/(4*pi*mu) * ( log(sqrt(norm(x'-xks(:,i),2)^2+epsilon^2)+epsilon)...
