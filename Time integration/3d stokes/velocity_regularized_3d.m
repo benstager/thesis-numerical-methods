@@ -1,7 +1,17 @@
-function [outputArg1,outputArg2] = velocity_regularized_3d(inputArg1,inputArg2)
-%VELOCITY_REGULARIZED_3D Summary of this function goes here
-%   Detailed explanation goes here
-outputArg1 = inputArg1;
-outputArg2 = inputArg2;
-end
+function v = velocity_regularized_3d(x,xks,fks)
+% Returns velocity vector in R2
 
+v = zeros(3,1);
+mu = 1;
+n = size(xks,2);
+epsilon = .5/10;
+r = @(x,y) norm(x-y,2);
+
+for i = 1:n
+    v_k = (1/mu)*(r(x',xks(:,i))^2+2*epsilon^2)...
+    /(8*pi*(r(x',xks(:,i))^2+epsilon^2)^(3/2))*fks(:,i)...
+    + (dot(fks(:,i),(x'-xks(:,i))))*(x'-xks(:,i))*...
+    1/(8*pi*(r(x',xks(:,i))^2+epsilon^2))^(3/2);
+    
+    v = v + v_k;
+end
