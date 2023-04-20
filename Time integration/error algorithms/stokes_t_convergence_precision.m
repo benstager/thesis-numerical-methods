@@ -4,26 +4,22 @@
 clear all;
 
 % grid parameters
-nx = 40;
-ny = 40;
 n = 5;
-epsilon = .5/10;
-[xks,fks,xs,ys] = stokes_parameters(nx,ny);
 X = init_blob(n);
 
 % reference fine solution, typical of power length(Nts) + 1
 Xv = reshape(X,[2*n,1]);
 tspan = [0,1];
-Nt_ref = 2^11;
+Nt_ref = 3^8;
 [Xvs,cpu] = IMEXSemiLinearEulerGMRES(@f,tspan,Xv,Nt_ref);
-Xvi = Xvs(:,end);
-Xvi = reshape(Xvi,[2,length(Xvi)/2]);
-x_ref = Xvi(1,:);
-y_ref = Xvi(2,:);
+Xvi_ref = Xvs(:,end);
+% Xvi = reshape(Xvi,[2,length(Xvi)/2]);
+% x_ref = Xvi(1,:);
+% y_ref = Xvi(2,:);
 
 
 methods = {@euler, @heun, @IMEXSemiLinearEulerGMRES};
-Nts = 2.^(6:10);
+Nts = 3.^(4:7);
 dts = diff(tspan)./Nts;
 
 error = zeros(length(Nts),length(methods));
@@ -34,10 +30,11 @@ for i = 1:length(methods)
     for j = 1:length(Nts)
         [Xvs,cpu] = methods{i}(@f,tspan,Xv,Nts(j));
         Xvi = Xvs(:,end);
-        Xvi = reshape(Xvi,[2,length(Xvi)/2]);
+%         Xvi = reshape(Xvi,[2,length(Xvi)/2]);
         x_coarse = Xvi(1,:);
         y_coarse = Xvi(2,:);
-        error(j,i) = norm([norm(x_ref-x_coarse,2);norm(y_ref-y_coarse,2)],2);
+        % error(j,i) = norm([norm(x_ref-x_coarse,2);norm(y_ref-y_coarse,2)],2);
+        error(j,i) = norm(Xvi_ref-Xvi);
         time(j,i) = cpu;
     end
 end
