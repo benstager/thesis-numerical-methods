@@ -11,7 +11,7 @@ switch eq
     
     case 'heat'
         
-        Nx = 150; % spatial grid points
+        Nx = 200; % spatial grid points
         Nt = 10.^(2:6); % timesteps to test
         eqn_name = sprintf('Heat Equation (Nx = %i)', Nx);
         
@@ -33,15 +33,19 @@ switch eq
    
     case 'dalquist' % y' = A y
         
-        A = 5;        
-        Nt = 10.^(1:5);
-        tspan = [0,1];
+        A = 3;        
+        Nt = 10.^(3:7);
+        tspan = [0,5];
         y0 = 1;
         eqn_name = sprintf('Dalquist');
         
         exact_analytical = exp(tspan(end)*A) * y0;
         
-        methods = {@eulerLin,@heunLin,@backwardsEulerLin,@impMidpointLin};
+        methods = {@eulerLin
+                   @heunLin
+                   @backwardsEulerLin
+                   @impMidpointLin
+            };
         errorNorm = @(approx) abs(approx - exact_analytical);
         spatialError = 0;
        
@@ -70,9 +74,9 @@ legend_entries = cellfun(getMethodName, methods, 'UniformOutput', false);
 
 % convergence diagram
 figure(1)
-loglog(dts,error,LineWidth=2.0);
-yline(spatialError, 'k--', LineWidth = 2.0);
-% ylim([1e-16, 1e2]);
+loglog(dts,error,LineWidth=3.0);
+%yline(spatialError, 'k--', LineWidth = 2.0);
+ylim([1e-16, 1e2]);
 xlabel('timestep (h)'); 
 ylabel('error'); 
 title(['Convergence Diagram - ', eqn_name]);
@@ -80,9 +84,9 @@ legend(legend_entries); legend box off;
 
 % precision diagram
 figure(2)
-loglog(time,error,LineWidth=2.0);
-yline(spatialError, 'k--', LineWidth = 2.0);
-% ylim([1e-16,1e2])
+loglog(time,error,LineWidth=3.0);
+%yline(spatialError, 'k--', LineWidth = 2.0);
+ylim([1e-16,1e2])
 xlabel('time (sec)'); 
 ylabel('error'); 
 title(['Precision Diagram - ', eqn_name]);

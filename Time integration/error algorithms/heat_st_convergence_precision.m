@@ -59,7 +59,7 @@ legend_entries = cellfun(getMethodName, methods, 'UniformOutput', false);
 
 % convergence diagram
 figure(1)
-loglog(Nx,error,LineWidth=2.0); hold on;
+loglog(Nx,error,LineWidth=3.0); hold on;
 loglog(Nx, Nx.^(-2), 'k--'); hold off;
 xlabel('grid size (Nx)');
 ylabel('error');
@@ -69,7 +69,7 @@ ylim([10^-12,10^2]); xlim('tight');
 
 % precision diagram
 figure(2)
-loglog(time,error,LineWidth=2.0);
+loglog(time,error,LineWidth=3.0);
 xlabel('time (sec)');
 ylabel('error');
 title('Precision Diagram for Heat Equation');
