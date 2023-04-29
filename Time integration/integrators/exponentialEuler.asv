@@ -1,4 +1,4 @@
-function [ys,cpu_time] = IMEXSemiLinearEulerBackslash(F,tspan,y0,N)
+function [ys,cpu_time] = exponentialEuler(F,tspan,y0,N)
 
 % Integrator that transforms F into Ly + N(y) and uses Jacobian
 
@@ -13,7 +13,9 @@ h = 10^-10;
 tic
 for i = 1:N
     J_yn = jac_FD(F,y,h);
-    y = (I-dt*J_yn)\(y + dt*(F(t,y)-J_yn*y));
+%     y = (I-dt*J_yn)\(y + dt*(F(t,y)-J_yn*y));
+    eJ_yn = expm(h*J_yn);
+    y = eJ_yn*y + h*(eJ_yn - 1)*(J_yn\(F(t,y)-jac_ProdFD(F,y,y,h)));
     ys(:,i+1) = y;
     t = t + dt;
 end

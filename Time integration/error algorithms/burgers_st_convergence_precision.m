@@ -76,10 +76,11 @@ end
 methods = {@euler,@heun,@IMEXeuler,@expIntegrator,@IMEXmidpoint,@IMEXdirk,@expRK};
 getMethodName = @(f) functions(f).function;
 legend_entries = cellfun(getMethodName, methods, 'UniformOutput', false);
+set(0,'defaultAxesFontSize',13)
 
 % convergence diagram
 figure(1)
-loglog(Nx,error,LineWidth=3.0); hold on;
+loglog(Nx,error,LineWidth=4.0); hold on;
 loglog(Nx, Nx.^(-2), 'k--'); hold off;
 xlabel('grid size (Nx)');
 ylabel('error');
@@ -89,7 +90,7 @@ legend(legend_entries); legend box off;
 
 % precision diagram
 figure(2)
-loglog(time,error,LineWidth=3.0);
+loglog(time,error,LineWidth=4.0);
 xlabel('time (sec)');
 ylabel('error');
 title('Precision Diagram for Burgers Equation');

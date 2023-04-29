@@ -2,7 +2,7 @@ function [X] = init_blob(n)
 % Init function returns location of [xi;yi] of n centers of each blob
 
 
-delta = .01;
+delta = .1;
 X = zeros(3,n);
 
 for i = 1:n

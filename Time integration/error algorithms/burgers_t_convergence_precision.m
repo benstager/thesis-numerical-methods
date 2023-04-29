@@ -7,7 +7,7 @@ close all;
 
 % burgers
 
-        Nx = 100; % spatial grid points
+        Nx = 250; % spatial grid points
         Nt = 10.^(1:4); % timesteps to test
         Nt_ref = 10^5;
         eqn_name = sprintf('Burgers Equation (Nx = %i)', Nx);
@@ -77,10 +77,11 @@ methods_full = {
 
 getMethodName = @(f) functions(f).function;
 legend_entries = cellfun(getMethodName, methods_full, 'UniformOutput', false);
+set(0,'defaultAxesFontSize',13)
 
 % convergence diagram
 figure(1)
-loglog(dts,error,LineWidth=3.0);
+loglog(dts,error,'-*',LineWidth=4.0);
 %yline(spatialError, 'k--', LineWidth = 2.0);
 ylim([1e-16, 1e2]);
 xlabel('timestep (h)'); 
@@ -90,7 +91,7 @@ legend(legend_entries); legend box off;
 
 % precision diagram
 figure(2)
-loglog(time,error,LineWidth=3.0);
+loglog(time,error,'-*',LineWidth=4.0);
 % yline(spatialError, 'k--', LineWidth = 2.0);
 ylim([1e-16,1e2])
 xlabel('time (sec)'); 

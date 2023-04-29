@@ -3,6 +3,7 @@ function [X] = init_blob(n)
 
 
 delta = .01;
+% delta = .01;
 X = zeros(2,n);
 
 for i = 1:n

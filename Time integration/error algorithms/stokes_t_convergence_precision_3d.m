@@ -33,11 +33,11 @@ end
 
 getMethodName = @(f) functions(f).function;
 legend_entries = cellfun(getMethodName, methods, 'UniformOutput', false);
-
+set(0,'defaultAxesFontSize',13)
 
 % convergence diagram
 figure(1)
-loglog(dts,error,LineWidth=3.0); hold on;
+loglog(dts,error,'-*',LineWidth=4.0); hold on;
 xlabel('step size (dt)');
 ylabel('error');
 title('Convergence Diagram for Stokes Flow');
@@ -46,7 +46,7 @@ ylim([10^-5, 10^2]);
 
 % precision diagram
 figure(2)
-loglog(time,error,LineWidth=3.0);
+loglog(time,error,'-*',LineWidth=4.0);
 xlabel('time (sec)');
 ylabel('error');
 title('Precision Diagram for Stokes Flow');

@@ -10,7 +10,7 @@ X = init_blob(n);
 % reference fine solution, typical of power length(Nts) + 1
 Xv = reshape(X,[2*n,1]);
 tspan = [0,1];
-Nt_ref = 2^11;
+Nt_ref = 3^8;
 [Xvs,cpu] = heun(@f,tspan,Xv,Nt_ref);
 Xvi_ref = Xvs(:,end);
 % Xvi = reshape(Xvi,[2,length(Xvi)/2]);
@@ -18,8 +18,8 @@ Xvi_ref = Xvs(:,end);
 % y_ref = Xvi(2,:);
 
 
-methods = {@euler, @heun};
-Nts = 2.^(6:10);
+methods = {@euler, @heun, @IMEXSemiLinearEulerGMRES};
+Nts = 3.^(4:7);
 dts = diff(tspan)./Nts;
 
 error = zeros(length(Nts),length(methods));
@@ -41,20 +41,20 @@ end
 
 getMethodName = @(f) functions(f).function;
 legend_entries = cellfun(getMethodName, methods, 'UniformOutput', false);
-
+set(0,'defaultAxesFontSize',13)
 
 % convergence diagram
 figure(1)
-loglog(dts,error,LineWidth=3.0); hold on;
+loglog(dts,error,'-*',LineWidth=4.0); hold on;
 xlabel('step size (dt)');
 ylabel('error');
 title('Convergence Diagram for Stokes Flow');
-legend(legend_entries); legend box on;
+legend(legend_entries); legend box on; 
 ylim([10^-5, 10^2]);
 
 % precision diagram
 figure(2)
-loglog(time,error,LineWidth=3.0);
+loglog(time,error,'-*',LineWidth=4.0);
 xlabel('time (sec)');
 ylabel('error');
 title('Precision Diagram for Stokes Flow');

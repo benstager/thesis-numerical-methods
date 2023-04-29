@@ -4,16 +4,16 @@ close all; clear all;
 
 nx = 40;
 ny = 40;
-n = 5;
+n = 15;
 epsilon = .5/10;
 
 [xks,fks,xs,ys] = stokes_parameters(nx,ny);
 X = init_blob_3d(n);
 
 Xv = reshape(X,[3*n,1]);
-tspan = [0,1];
-Nt = 1000;
-[Xvs,cpu] = heun(@f_3d,tspan,Xv,Nt);
+tspan = [0,2];
+Nt = 10^4;
+[Xvs,cpu] = euler(@f_3d,tspan,Xv,Nt);
 
 figure()
 for i = 1:Nt
