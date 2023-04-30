@@ -13,7 +13,7 @@ X = init_blob(n);
 Xv = reshape(X,[2*n,1]);
 tspan = [0,2];
 Nt = 2^11;
-[Xvs,cpu] = heun(@f,tspan,Xv,Nt);
+[Xvs,cpu] = IMEXSemiLinearEulerGMRES(@f,tspan,Xv,Nt);
 
 figure()
 for i = 1:Nt

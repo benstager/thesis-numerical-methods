@@ -10,8 +10,8 @@ X = init_blob(n);
 % reference fine solution, typical of power length(Nts) + 1
 Xv = reshape(X,[2*n,1]);
 tspan = [0,1];
-Nt_ref = 3^8;
-[Xvs,cpu] = heun(@f,tspan,Xv,Nt_ref);
+Nt_ref = 2^12;
+[Xvs,cpu] = IMEXSemiLinearEulerGMRES(@f,tspan,Xv,Nt_ref);
 Xvi_ref = Xvs(:,end);
 % Xvi = reshape(Xvi,[2,length(Xvi)/2]);
 % x_ref = Xvi(1,:);
@@ -19,7 +19,7 @@ Xvi_ref = Xvs(:,end);
 
 
 methods = {@euler, @heun, @IMEXSemiLinearEulerGMRES};
-Nts = 3.^(4:7);
+Nts = 2.^(6:10);
 dts = diff(tspan)./Nts;
 
 error = zeros(length(Nts),length(methods));

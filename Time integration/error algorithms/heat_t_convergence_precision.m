@@ -11,7 +11,7 @@ switch eq
     
     case 'heat'
         
-        Nx = 200; % spatial grid points
+        Nx = 150; % spatial grid points
         Nt = 10.^(2:6); % timesteps to test
         eqn_name = sprintf('Heat Equation (Nx = %i)', Nx);
         
@@ -34,8 +34,8 @@ switch eq
     case 'dalquist' % y' = A y
         
         A = 3;        
-        Nt = 10.^(3:7);
-        tspan = [0,5];
+        Nt = 2.^(4:8);
+        tspan = [0,1];
         y0 = 1;
         eqn_name = sprintf('Dalquist');
         
@@ -75,8 +75,8 @@ set(0,'defaultAxesFontSize',13)
 
 % convergence diagram
 figure(1)
-loglog(dts,error,LineWidth=4.0);
-%yline(spatialError, 'k--', LineWidth = 2.0);
+loglog(dts,error,'-*',LineWidth=4.0);
+yline(spatialError, 'k--', LineWidth = 2.0);
 ylim([1e-16, 1e2]);
 xlabel('timestep (h)'); 
 ylabel('error'); 
@@ -85,8 +85,8 @@ legend(legend_entries); legend box off;
 
 % precision diagram
 figure(2)
-loglog(time,error,LineWidth=4.0);
-%yline(spatialError, 'k--', LineWidth = 2.0);
+loglog(time,error,'-*',LineWidth=4.0);
+yline(spatialError, 'k--', LineWidth = 2.0);
 ylim([1e-16,1e2])
 xlabel('time (sec)'); 
 ylabel('error'); 

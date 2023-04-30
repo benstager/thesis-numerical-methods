@@ -60,7 +60,7 @@ set(0,'defaultAxesFontSize',13)
 
 % convergence diagram
 figure(1)
-loglog(Nx,error,LineWidth=4.0); hold on;
+loglog(Nx,error,'-*',LineWidth=4.0); hold on;
 loglog(Nx, Nx.^(-2), 'k--'); hold off;
 xlabel('grid size (Nx)');
 ylabel('error');
@@ -70,7 +70,7 @@ ylim([10^-12,10^2]); xlim('tight');
 
 % precision diagram
 figure(2)
-loglog(time,error,LineWidth=4.0);
+loglog(time,error,'-*',LineWidth=4.0);
 xlabel('time (sec)');
 ylabel('error');
 title('Precision Diagram for Heat Equation');
