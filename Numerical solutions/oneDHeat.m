@@ -12,7 +12,7 @@ dt = diff(tspan)/(Nt-1);
 
 % Each x and t vectors to evaluate u(x,t) at
 xs = linspace(xspan(1),xspan(end),Nx);
-ts = linspace(xspan(1),xspan(end),Nt);
+ts = linspace(tspan(1),tspan(2),Nt);
 
 % Coeffecient of finite approximation
 alpha = dt/dx^2;
@@ -38,6 +38,7 @@ surf(ts,xs,u)
 title('1D Heat eq')
 xlabel('t')
 ylabel('x')
+zlabel('u(x,t)')
 colormap(jet(256))
 colorbar
 shading interp 

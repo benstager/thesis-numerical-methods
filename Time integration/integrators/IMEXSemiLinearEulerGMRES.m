@@ -10,7 +10,7 @@ dt = diff(tspan)/N;
 t = tspan(1);
 dim = length(y0);
 tol = 10^-4;
-h = 10^-8;
+h = 10^-9;
 
 tic
 for i = 1:N

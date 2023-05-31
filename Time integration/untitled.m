@@ -1,8 +1,8 @@
 
 
-Nts = [4 16];
+Nts = [4 16 32];
 tspan = [0,1];
-f = @(t,y) -10*y;
+f = @(t,y) 3*y;
 y0 = 1;
 
 for i = 1:length(Nts)
@@ -14,8 +14,9 @@ for i = 1:length(Nts)
 end
 
 hold on;
-f = @(t) exp(-15*t);
+f = @(t) exp(3*t);
 fplot(f,tspan,LineWidth = 4.0, color = 'black');
-ylim([-2,2]);
 
-legend('h = 1/4', 'h = 1/16', 'Exact');
+legend('h = 1/4', 'h = 1/16', 'h = 1/32', 'Exact')
+
+

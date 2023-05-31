@@ -4,7 +4,7 @@ close all; clear all;
 
 nx = 40;
 ny = 40;
-n = 10;
+n = 15;
 epsilon = .5/10;
 
 [xks,fks,xs,ys] = stokes_parameters(nx,ny);

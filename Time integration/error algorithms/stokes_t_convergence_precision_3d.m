@@ -10,12 +10,12 @@ X = init_blob_3d(n);
 % reference fine solution, typical of power length(Nts) + 1
 Xv = reshape(X,[3*n,1]);
 tspan = [0,1];
-Nt_ref = 2^13;
+Nt_ref = 2^12;
 [Xvs,cpu] = IMEXSemiLinearEulerGMRES(@f_3d,tspan,Xv,Nt_ref);
 Xvi_ref = Xvs(:,end);
 
 methods = {@euler, @heun, @IMEXSemiLinearEulerGMRES};
-Nts = 2.^(6:12);
+Nts = 2.^(2:10);
 dts = diff(tspan)./Nts;
 
 error = zeros(length(Nts),length(methods));
@@ -42,7 +42,7 @@ xlabel('step size (dt)');
 ylabel('error');
 title('Convergence Diagram for Stokes Flow');
 legend(legend_entries); legend box on;
-ylim([10^-5, 10^2]);
+%ylim([10^-5, 10^2]);
 
 % precision diagram
 figure(2)
@@ -51,5 +51,5 @@ xlabel('time (sec)');
 ylabel('error');
 title('Precision Diagram for Stokes Flow');
 legend(legend_entries); legend box off;
-ylim([10^-5, 10^2]);
+%ylim([10^-5, 10^2]);
         

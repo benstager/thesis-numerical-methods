@@ -11,7 +11,7 @@ t = tspan(1);
 tic
 for i = 1:N
     k1 = f(t,y);
-    k2 = f(t,y+dt*k1);
+    k2 = f(t+dt,y+dt*k1);
     y = y +.5*dt*(k1+k2);
     ys(:,i+1) = y;
     t = t+ dt;

@@ -5,7 +5,7 @@
 clear;
 close all;
 
-eq = 'heat'; % 'heat' or 'dalquist'
+eq = 'dalquist'; % 'heat' or 'dalquist'
 
 switch eq
     
@@ -33,9 +33,9 @@ switch eq
    
     case 'dalquist' % y' = A y
         
-        A = 3;        
-        Nt = 2.^(4:8);
-        tspan = [0,1];
+        A = 1i - 1/10;        
+        Nt = 2.^(3:7);
+        tspan = [0,100];
         y0 = 1;
         eqn_name = sprintf('Dalquist');
         
@@ -77,7 +77,7 @@ set(0,'defaultAxesFontSize',13)
 figure(1)
 loglog(dts,error,'-*',LineWidth=4.0);
 yline(spatialError, 'k--', LineWidth = 2.0);
-ylim([1e-16, 1e2]);
+%ylim([1e-16, 1e2]);
 xlabel('timestep (h)'); 
 ylabel('error'); 
 title(['Convergence Diagram - ', eqn_name]);
@@ -87,7 +87,7 @@ legend(legend_entries); legend box off;
 figure(2)
 loglog(time,error,'-*',LineWidth=4.0);
 yline(spatialError, 'k--', LineWidth = 2.0);
-ylim([1e-16,1e2])
+%ylim([1e-16,1e2])
 xlabel('time (sec)'); 
 ylabel('error'); 
 title(['Precision Diagram - ', eqn_name]);
